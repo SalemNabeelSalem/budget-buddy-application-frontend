@@ -5,7 +5,7 @@ const Input = ({type, label, value, onchange, placeholder}) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev)
   }
 
   return (
@@ -18,7 +18,7 @@ const Input = ({type, label, value, onchange, placeholder}) => {
         <input
           className="w-full bg-transparent outline-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading focus:outline-none focus:border-blue-500"
           id={label}
-          type={type || "text" === "password" ? (showPassword ? "text" : "password") : type}
+          type={type === "password" ? (showPassword ? "text" : "password") : type}
           value={value}
           onChange={(e) => onchange(e)}
           placeholder={placeholder}

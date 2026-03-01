@@ -1,7 +1,15 @@
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {assets} from "../assets/assets.js";
+
 import Input from "../components/Input.jsx";
+import AxiosConfig from "../utils/AxiosConfig.jsx";
+
+import images from "../assets/images.js";
+import {validateEmail} from "../utils/validations.js";
+import {API_ENDPOINTS} from "../utils/api-endpoints.js";
+
+import toast from "react-hot-toast";
+import {LoaderCircle} from "lucide-react";
 
 const Signup = () => {
   const [fullName, setFullName] = useState('');
@@ -12,11 +20,61 @@ const Signup = () => {
 
   const [error, setError] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    if (!fullName.trim()) {
+      setError('Full Name is required.');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError('Email is required and must be valid.');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!password.trim()) {
+        setError('Password is required.');
+        setIsLoading(false);
+        return;
+    }
+
+    setError(null);
+
+    try {
+      const response = await AxiosConfig.post(API_ENDPOINTS.auth.register, {
+        fullName,
+        email,
+        password,
+      });
+
+      if (response.status === 201) {
+        toast.success(
+          "Account created successfully! Please check your email to activate your account.", {
+          duration: 5000,
+        });
+
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("signup error:", error);
+      setError("An error occurred during signup. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
-      <img src={String(assets.login_bg)} alt="Signup Background" className="absolute inset-0 w-full h-full object-cover filter blur-sm" />
+      <img src={String(images.loginBackground)} alt="Signup Background" className="absolute inset-0 w-full h-full object-cover filter blur-sm" />
 
       <div className="relative z-10 w-full max-w-lg px-6">
         <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90vh] overflow-y-auto">
@@ -24,13 +82,13 @@ const Signup = () => {
             Create Your Account
           </h3>
 
-          <p className="text-sm text-slate-700 text-center mb-8">
+          <p className="text-sm text-slate-700 text-center mb-4">
             Start tracking your expenses and managing your finances with ease. Join us today!
           </p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="flex justify-center mb-6">
-              <img src={String(assets.logo_icon)} alt="Logo" className="w-16 h-16" />
+              <img src={String(images.logo)} alt="Logo" className="w-16 h-16" />
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
@@ -65,16 +123,24 @@ const Signup = () => {
 
             <button
               type="submit"
-              className="w-full py-3 text-lg font-medium inline-flex items-center justify-center bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+              className={`w-full py-3 text-lg font-medium inline-flex items-center justify-center bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition uppercase ${isLoading ? 'cursor-not-allowed opacity-70' : ''}`}
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? (
+                <>
+                  <LoaderCircle className="animate-spin mr-2" size={20} />
+                  Signing Up...
+                </>
+              ) : (
+                "SIGNUP"
+              )}
             </button>
 
             <p className="text-sm text-slate-800 text-center mt-6">
               Already have an account?
 
               <Link to="/login" className="text-indigo-600 hover:text-indigo-700 font-medium ml-1">
-                Log In
+                Login
               </Link>
             </p>
           </form>

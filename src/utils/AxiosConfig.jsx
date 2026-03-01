@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosConfig = axios.create({
-  baseURL: "https://budget-buddy-application-backend.onrender.com/api/v1.0",
+  baseURL: "http://localhost:8080/api/v1.0",
   headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -39,11 +39,13 @@ AxiosConfig.interceptors.response.use(
   },
   (error) => {
     if (error.response) { // handle specific status codes
-      if (error.response.status === 401) { // unauthorized, token might be invalid or expired
+      if (error.response.status === 400) {
+        alert("400 Bad Request");
+      } else if (error.response.status === 401) { // unauthorized, token might be invalid or expired
         localStorage.removeItem("token");
         window.location.href = "/login"; // redirect to login page
       } else if (error.response.status === 403) { // forbidden, user does not have permission
-        alert("You do not have permission to perform this action.");
+        alert("403 Forbidden: You do not have permission to access this resource.");
       } else if (error.response.status === 500) { // internal server error
         alert("An error occurred on the server. Please try again later.");
       }
