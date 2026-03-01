@@ -3,10 +3,12 @@ import {Link, useNavigate} from "react-router-dom";
 
 import Input from "../components/Input.jsx";
 import AxiosConfig from "../utils/AxiosConfig.jsx";
+import ProfilePhotoUpload from "../components/ProfilePhotoUpload.jsx";
 
 import images from "../assets/images.js";
 import {validateEmail} from "../utils/validations.js";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
+import uploadProfileImage from "../utils/upload-profile-image.js";
 
 import toast from "react-hot-toast";
 import {LoaderCircle} from "lucide-react";
@@ -22,12 +24,23 @@ const Signup = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let profileImageUrl = null;
+
     setIsLoading(true);
+
+    if (!profilePhoto || !profilePhoto.type.startsWith("image/")) {
+      setError("Selected file must be an image.");
+      setIsLoading(false);
+      setProfilePhoto(null);
+      return;
+    }
 
     if (!fullName.trim()) {
       setError('Full Name is required.');
@@ -50,10 +63,19 @@ const Signup = () => {
     setError(null);
 
     try {
+      if (profilePhoto) {
+        const uploadResult = await uploadProfileImage(profilePhoto);
+
+        if (uploadResult.ok) {
+          profileImageUrl = uploadResult.url || null;
+        }
+      }
+
       const response = await AxiosConfig.post(API_ENDPOINTS.auth.register, {
         fullName,
         email,
         password,
+        profileImageUrl
       });
 
       if (response.status === 201) {
@@ -78,6 +100,10 @@ const Signup = () => {
 
       <div className="relative z-10 w-full max-w-lg px-6">
         <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90vh] overflow-y-auto">
+          <div className="flex justify-center mb-6">
+            <img src={String(images.logo)} alt="Logo" className="w-16 h-16" />
+          </div>
+
           <h3 className="text-2xl font-semibold text-black text-center mb-2">
             Create Your Account
           </h3>
@@ -87,8 +113,8 @@ const Signup = () => {
           </p>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
-            <div className="flex justify-center mb-6">
-              <img src={String(images.logo)} alt="Logo" className="w-16 h-16" />
+            <div className="flex justify-center -mb-4">
+              <ProfilePhotoUpload photo={profilePhoto} setPhoto={setProfilePhoto} />
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4">

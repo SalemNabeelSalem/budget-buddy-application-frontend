@@ -1,7 +1,9 @@
 import axios from "axios";
 
+import {BACKEND_BASE_URL} from "./api-endpoints";
+
 const AxiosConfig = axios.create({
-  baseURL: "http://localhost:8080/api/v1.0",
+  baseURL: BACKEND_BASE_URL,
   headers: {
     "Content-Type": "application/json",
     "Accept": "application/json",

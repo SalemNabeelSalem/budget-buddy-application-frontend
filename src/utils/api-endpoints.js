@@ -1,4 +1,7 @@
-// const BACKEND_BASE_URL = "http://localhost:8080/api/v1.0";
+const { VITE_CLOUDINARY_CLOUD_NAME, VITE_BACKEND_BASE_URL } = import.meta.env;
+
+export const CLOUDINARY_CLOUD_NAME = VITE_CLOUDINARY_CLOUD_NAME;
+export const BACKEND_BASE_URL = VITE_BACKEND_BASE_URL;
 
 const endpoints = {
   auth: {
@@ -9,7 +12,10 @@ const endpoints = {
   actuator: {
     status: "/status",
     health: "/health",
-  }
+  },
+  cloudinary: {
+    upload: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+  },
 };
 
 export const API_ENDPOINTS = Object.freeze(endpoints);
