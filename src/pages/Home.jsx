@@ -1,8 +1,17 @@
+import Dashboard from "../components/Dashboard.jsx";
+import UseUser from "../hooks/UseUser.jsx";
+
 const Home = () => {
+  UseUser();
+
   return (
     <div className="home">
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page of our React application.</p>
+      <Dashboard activeMenu="Dashboard">
+          <div className="p-6">
+            <h1 className="text-2xl font-bold mb-4">Welcome to Budget Buddy!</h1>
+            <p className="text-gray-600">Please log in to access your dashboard and manage your budget.</p>
+          </div>
+      </Dashboard>
     </div>
   );
 }

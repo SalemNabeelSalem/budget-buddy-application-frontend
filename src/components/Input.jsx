@@ -3,10 +3,10 @@ import {useState} from "react";
 import {Eye, EyeOff} from "lucide-react";
 
 const Input = ({type, label, value, onchange, placeholder}) => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
-    setShowPassword((prev) => !prev)
+    setShowPassword((prev) => !prev);
   }
 
   return (

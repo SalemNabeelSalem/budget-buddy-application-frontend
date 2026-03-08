@@ -46,10 +46,10 @@ AxiosConfig.interceptors.response.use(
       } else if (error.response.status === 401) { // unauthorized, token might be invalid or expired
         localStorage.removeItem("token");
         window.location.href = "/login"; // redirect to login page
-      } else if (error.response.status === 403) { // forbidden, user does not have permission
+      } else if (error.response.status === 403) {
         alert("403 Forbidden: You do not have permission to access this resource.");
-      } else if (error.response.status === 500) { // internal server error
-        alert("An error occurred on the server. Please try again later.");
+      } else if (error.response.status === 500) {
+        alert("500 Internal Server Error: Something went wrong on the server. Please try again later.");
       }
     } else if (error.request) { // no response received from server
       alert("No response from server. Please check your network connection.");

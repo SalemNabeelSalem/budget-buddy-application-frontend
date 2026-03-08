@@ -8,6 +8,7 @@ const endpoints = {
     login: "/profile/login",
     register: "/profile/register",
     activate: "/profile/activate",
+    me: "/profile/me",
   },
   actuator: {
     status: "/status",

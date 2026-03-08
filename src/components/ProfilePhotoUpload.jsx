@@ -3,8 +3,15 @@ import {useRef, useState} from "react";
 import {Upload, User, X} from "lucide-react";
 
 const ProfilePhotoUpload = ({ photo, setPhoto }) => {
+  /*
+   * useRef is used to create a reference to the hidden file input element.
+   * this allows us to programmatically trigger a click on the input when the user clicks the "Choose Photo" button.
+  */
   const inputRef = useRef(null);
 
+  /*
+   * useState is used to manage the state of the preview URL for the selected photo.
+  */
   const [previewURL, setPreviewURL] = useState(null);
 
   const handleImageChange = (e) => {
