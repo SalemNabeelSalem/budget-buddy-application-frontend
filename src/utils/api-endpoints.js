@@ -4,19 +4,18 @@ export const CLOUDINARY_CLOUD_NAME = VITE_CLOUDINARY_CLOUD_NAME;
 export const BACKEND_BASE_URL = VITE_BACKEND_BASE_URL;
 
 const endpoints = {
-  auth: {
-    login: "/profile/login",
-    register: "/profile/register",
-    activate: "/profile/activate",
-    me: "/profile/me",
+  PROFILE: {
+    REGISTER: "/profile/register",
+    LOGIN: "/profile/login",
+    ME: "/profile/me",
   },
-  actuator: {
-    status: "/status",
-    health: "/health",
+  CLOUDINARY: {
+    UPLOAD: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
   },
-  cloudinary: {
-    upload: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-  },
+  CATEGORY: {
+    LIST: "/category",
+    CREATE: "/category/create",
+  }
 };
 
 export const API_ENDPOINTS = Object.freeze(endpoints);

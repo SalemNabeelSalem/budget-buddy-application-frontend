@@ -1,5 +1,6 @@
-import Dashboard from "../components/Dashboard.jsx";
 import UseUser from "../hooks/UseUser.jsx";
+
+import Dashboard from "../components/Dashboard/Dashboard.jsx";
 
 const Home = () => {
   UseUser();

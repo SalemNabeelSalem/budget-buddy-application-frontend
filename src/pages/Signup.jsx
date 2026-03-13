@@ -2,13 +2,14 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 import Input from "../components/Input.jsx";
-import AxiosConfig from "../utils/AxiosConfig.jsx";
 import ProfilePhotoUpload from "../components/ProfilePhotoUpload.jsx";
 
 import images from "../assets/images.js";
+
 import {validateEmail} from "../utils/validations.js";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
 import uploadProfileImage from "../utils/upload-profile-image.js";
+import AxiosConfig from "../utils/AxiosConfig.jsx";
 
 import toast from "react-hot-toast";
 import {LoaderCircle} from "lucide-react";
@@ -71,7 +72,7 @@ const Signup = () => {
         }
       }
 
-      const response = await AxiosConfig.post(API_ENDPOINTS.auth.register, {
+      const response = await AxiosConfig.post(API_ENDPOINTS.PROFILE.REGISTER, {
         fullName,
         email,
         password,

@@ -2,10 +2,12 @@ import {useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 import Input from "../components/Input.jsx";
-import AxiosConfig from "../utils/AxiosConfig.jsx";
+
 import {AppContext} from "../contexts/AppContext.jsx";
 
 import images from "../assets/images.js";
+
+import AxiosConfig from "../utils/AxiosConfig.jsx";
 import {validateEmail} from "../utils/validations.js";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
 
@@ -45,7 +47,7 @@ const Login = () => {
     setError(null);
 
     try {
-      const response = await AxiosConfig.post(API_ENDPOINTS.auth.login, {
+      const response = await AxiosConfig.post(API_ENDPOINTS.PROFILE.LOGIN, {
         email,
         password,
       });

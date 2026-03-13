@@ -2,7 +2,7 @@ import {useState} from "react";
 
 import {Eye, EyeOff} from "lucide-react";
 
-const Input = ({type, label, value, onchange, placeholder}) => {
+const Input = ({type, label, value, onchange, placeholder, isSelect, options}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -16,14 +16,33 @@ const Input = ({type, label, value, onchange, placeholder}) => {
       </label>
 
       <div className="relative">
-        <input
-          className="w-full bg-transparent outline-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading focus:outline-none focus:border-blue-500"
-          id={label}
-          type={type === "password" ? (showPassword ? "text" : "password") : type}
-          value={value}
-          onChange={(e) => onchange(e)}
-          placeholder={placeholder}
-        />
+        {isSelect ? (
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            id={label}
+            value={value}
+            onChange={(e) => onchange(e.target)}
+          >
+            <option value="" defaultChecked disabled>
+              Select {label}
+            </option>
+
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <input
+            className="w-full bg-transparent outline-none border border-gray-300 rounded-md py-2 px-3 text-gray-700 leading focus:outline-none focus:border-blue-500"
+            id={label}
+            type={type === "password" ? (showPassword ? "text" : "password") : type}
+            value={value}
+            onChange={(e) => onchange(e)}
+            placeholder={placeholder}
+          />
+        )}
 
         {type === "password" && (
           <span

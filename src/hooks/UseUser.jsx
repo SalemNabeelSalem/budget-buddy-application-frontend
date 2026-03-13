@@ -19,7 +19,7 @@ const UseUser = () => {
 
     const fetchUserInfo = async () => {
       try {
-        const response = await axiosConfig.get(API_ENDPOINTS.auth.me);
+        const response = await axiosConfig.get(API_ENDPOINTS.PROFILE.ME);
 
         if (isMounted && response.status === 200) {
           setUser(response.data);

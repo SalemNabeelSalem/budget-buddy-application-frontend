@@ -10,7 +10,7 @@ const uploadProfileImage = async (image) => {
   formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
   try {
-    const response = await fetch(API_ENDPOINTS.cloudinary.upload, {
+    const response = await fetch(API_ENDPOINTS.CLOUDINARY.UPLOAD, {
       method: "POST",
       body: formData,
     });
@@ -45,7 +45,7 @@ const uploadProfileImage = async (image) => {
     */
     return { ok: true, url: data?.secure_url ?? data?.url ?? null, body: data };
   } catch (error) {
-    console.error("Error uploading image:", error);
+    console.error("error uploading image:", error);
     throw error;
   }
 }
