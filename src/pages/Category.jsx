@@ -3,9 +3,9 @@ import {useEffect, useState} from "react";
 import UseUser from "../hooks/UseUser.jsx";
 
 import Model from "../components/Model.jsx";
-import Dashboard from "../components/Dashboard/Dashboard.jsx";
-import CategoryList from "../components/Category/CategoryList.jsx";
-import AddCategoryForm from "../components/Category/AddCategoryForm.jsx";
+import Dashboard from "../components/dashboard/Dashboard.jsx";
+import CategoryList from "../components/category/CategoryList.jsx";
+import AddCategoryForm from "../components/category/AddCategoryForm.jsx";
 
 import AxiosConfig from "../utils/AxiosConfig.jsx";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
@@ -51,11 +51,21 @@ const Category = () => {
 
     setLoading(true);
 
+    const existingCategory = categoryDate.find(
+      (cat) => cat.name.toLowerCase() === category.name.toLowerCase()
+    );
+
+    if (existingCategory) {
+      toast.error("A category with the same name already exists. Please choose a different name.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await AxiosConfig.post(API_ENDPOINTS.CATEGORY.CREATE, category);
 
       if (response.status === 201) {
-        toast.success("Category added successfully.");
+        toast.success("category added successfully.");
 
         setOpenAddCategoryModal(false);
 
@@ -65,18 +75,64 @@ const Category = () => {
       }
     } catch (error) {
       console.error("error adding category:", error.response.data.message);
-
-      toast.error(error.response.data.message);
     } finally {
       setLoading(false);
     }
+  }
+
+  const handleEditCategory = (category) => {
+    setSelectedCategory(category);
+
+    setOpenEditCategoryModal(true);
+  }
+
+  const handleUpdateCategory = async (updatedCategory) => {
+    if (loading) return;
+
+    setLoading(true);
+
+    const existingCategory = categoryDate.find(
+      (cat) => cat.name.toLowerCase() === updatedCategory.name.toLowerCase() && cat.id !== selectedCategory.id
+    );
+
+    if (existingCategory) {
+      toast.error("A category with the same name already exists. Please choose a different name.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await AxiosConfig.put(API_ENDPOINTS.CATEGORY.UPDATE(selectedCategory.id), updatedCategory);
+
+      if (response.status === 200) {
+        toast.success("category updated successfully.");
+
+        setOpenEditCategoryModal(false);
+
+        setSelectedCategory(null);
+
+        fetchCategoryDetails().then(
+          () => console.log("category details fetched successfully after updating category.")
+        );
+      }
+    } catch (error) {
+      console.error("error updating category:", error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleDeleteCategory = (category) => {
+    console.log("handle delete category:", category);
   }
 
   useEffect(() => {
     fetchCategoryDetails().then(() => {
       console.log("category details fetched successfully.");
     });
-  }, []);
+
+    console.log("selected category changed:", selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <Dashboard activeMenu="Categories">
@@ -93,7 +149,7 @@ const Category = () => {
           </button>
         </div>
 
-        <CategoryList categories={categoryDate} />
+        <CategoryList categories={categoryDate} onEditCategory={handleEditCategory} onDeleteCategory={handleDeleteCategory} />
 
         {openAddCategoryModal && (
           <Model
@@ -102,6 +158,23 @@ const Category = () => {
             onClose={() => setOpenAddCategoryModal(false)}
           >
             <AddCategoryForm onAddCategory={handleAddCategory} />
+          </Model>
+        )}
+
+        {openEditCategoryModal && (
+          <Model
+            title="Update Category"
+            isOpen={openEditCategoryModal}
+            onClose={() => {
+              setOpenEditCategoryModal(false);
+              setSelectedCategory(null);
+            }}
+          >
+            <AddCategoryForm
+              onAddCategory={handleUpdateCategory}
+              initialCategoryData={{...selectedCategory}}
+              isEditing={true}
+            />
           </Model>
         )}
       </div>

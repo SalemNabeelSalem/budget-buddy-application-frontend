@@ -1,7 +1,7 @@
 import {useContext} from "react";
 
-import MenuBar from "../MenuBar.jsx";
-import Sidebar from "../Sidebar.jsx";
+import MenuBar from "./MenuBar.jsx";
+import Sidebar from "./Sidebar.jsx";
 
 import {AppContext} from "../../contexts/AppContext.jsx";
 

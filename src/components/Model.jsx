@@ -1,6 +1,6 @@
 import {X} from "lucide-react";
 
-const Model = ({isOpen, onClose, children, title}) => {
+const Model = ({title, children, isOpen, onClose}) => {
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center w-full h-full overflow-hidden bg-black/40 backdrop-blur-sm">
       <div className="relative p-4 w-full max-w-2xl max-h-[90vh]">

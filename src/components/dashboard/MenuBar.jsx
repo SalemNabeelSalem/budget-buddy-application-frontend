@@ -2,8 +2,8 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import Sidebar from "./Sidebar.jsx";
-import images from "../assets/images.js";
-import {AppContext} from "../contexts/AppContext.jsx";
+import images from "../../assets/images.js";
+import {AppContext} from "../../contexts/AppContext.jsx";
 
 import {LogOut, Menu, User, X} from "lucide-react";
 

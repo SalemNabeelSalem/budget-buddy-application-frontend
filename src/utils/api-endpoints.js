@@ -15,6 +15,7 @@ const endpoints = {
   CATEGORY: {
     LIST: "/category",
     CREATE: "/category/create",
+    UPDATE: (categoryId) => `/category/${categoryId}`,
   }
 };
 

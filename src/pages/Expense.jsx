@@ -1,6 +1,6 @@
 import UseUser from "../hooks/UseUser.jsx";
 
-import Dashboard from "../components/Dashboard/Dashboard.jsx";
+import Dashboard from "../components/dashboard/Dashboard.jsx";
 
 const Expense = () => {
   UseUser();

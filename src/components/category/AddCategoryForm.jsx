@@ -1,14 +1,14 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import Input from "../Input.jsx";
 
-import EmojiPickerPopup from "../EmojiPickerPopup.jsx";
+import EmojiPickerPopup from "../global/EmojiPickerPopup.jsx";
 
 import toast from "react-hot-toast";
 import {LoaderCircle} from "lucide-react";
 
-const AddCategoryForm = ({onAddCategory}) => {
-  const [loading, setLoading] = useState(true);
+const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
+  const [loading, setLoading] = useState(false);
 
   const [category, setCategory] = useState({
     name: "",
@@ -33,17 +33,17 @@ const AddCategoryForm = ({onAddCategory}) => {
     setLoading(true);
 
     if (!category.name) {
-      toast.error("Category name is required.");
+      toast.error("category name is required.");
       return;
     }
 
     if (!category.type) {
-      toast.error("Category type is required.");
+      toast.error("category type is required.");
       return;
     }
 
     if (!category.icon) {
-      toast.error("Category icon is required.");
+      toast.error("category icon is required.");
       return;
     }
 
@@ -53,6 +53,18 @@ const AddCategoryForm = ({onAddCategory}) => {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    if (isEditing && initialCategoryData) {
+      setCategory({...initialCategoryData});
+    } else {
+      setCategory({
+        name: "",
+        type: "expense",
+        icon: "",
+      });
+    }
+  }, [isEditing, initialCategoryData])
 
   return (
     <div className="p-4">
@@ -77,6 +89,7 @@ const AddCategoryForm = ({onAddCategory}) => {
         width="300px"
         height="420px"
         emojiStyle="google"
+        selectedEmoji={category.icon}
         onEmojiChoose={(emojiData) => handleInputChange("icon", emojiData.emoji)}
       />
 
@@ -89,11 +102,12 @@ const AddCategoryForm = ({onAddCategory}) => {
         {loading ? (
           <>
             <LoaderCircle size={16} className="animate-spin inline-block mr-2 mb-1" />
-            Adding...
+
+            {isEditing ? "Updating..." : "Adding..."}
           </>
         ) : (
           <>
-            Add Category
+            {isEditing ? "Update Category" : "Add Category"}
           </>
         )}
       </button>

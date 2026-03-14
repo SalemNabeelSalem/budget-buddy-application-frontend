@@ -2,6 +2,8 @@ import axios from "axios";
 
 import {BACKEND_BASE_URL} from "./api-endpoints";
 
+import toast from "react-hot-toast";
+
 const AxiosConfig = axios.create({
   baseURL: BACKEND_BASE_URL,
   headers: {
@@ -40,20 +42,31 @@ AxiosConfig.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response) { // handle specific status codes
+    if (error.response) {
       if (error.response.status === 400) {
-        alert("400 Bad Request");
-      } else if (error.response.status === 401) { // unauthorized, token might be invalid or expired
+        // alert("400 Bad Request: The request was invalid. Please check your input and try again.");
+        toast.error(
+          `400 Bad Request: ${error.response.data.message || "The request was invalid. Please check your input and try again."}`
+        );
+      } else if (error.response.status === 401) {
         localStorage.removeItem("token");
-        window.location.href = "/login"; // redirect to login page
+        window.location.href = "/login";
       } else if (error.response.status === 403) {
-        alert("403 Forbidden: You do not have permission to access this resource.");
+        toast.error(
+          `403 Forbidden: ${error.response.data.message || "You do not have permission to access this resource."}`
+        );
+      } else if (error.response.status === 409) {
+        toast.error(
+          `409 Conflict: ${error.response.data.message || "The request could not be completed due to a conflict with the current state of the resource."}`
+        );
       } else if (error.response.status === 500) {
-        alert("500 Internal Server Error: Something went wrong on the server. Please try again later.");
+        toast.error(
+          `500 Internal Server Error: ${error.response.data.message || "An unexpected error occurred on the server. Please try again later."}`
+        );
       }
-    } else if (error.request) { // no response received from server
+    } else if (error.request) {
       alert("No response from server. Please check your network connection.");
-    } else { // other errors
+    } else {
       alert("An error occurred. Please try again.");
     }
 

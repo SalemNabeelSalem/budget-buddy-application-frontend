@@ -4,9 +4,7 @@ import EmojiPicker from "emoji-picker-react";
 
 import {Image} from "lucide-react";
 
-const EmojiPickerPopup = ({width, height, emojiStyle, onEmojiChoose}) => {
-  const [icon, setIcon] = useState("");
-
+const EmojiPickerPopup = ({width, height, emojiStyle, onEmojiChoose, selectedEmoji = ""}) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   return (
@@ -16,9 +14,9 @@ const EmojiPickerPopup = ({width, height, emojiStyle, onEmojiChoose}) => {
         onClick={() => setShowEmojiPicker((prev) => !prev)}
         className="px-3 py-2 bg-gray-200 rounded mb-2"
       >
-        {icon ? (
+        {selectedEmoji ? (
           <span className="flex items-center gap-1">
-            <span className="text-md">{icon}</span>
+            <span className="text-md">{selectedEmoji}</span>
             Change Icon
           </span>
         ) : (
@@ -39,7 +37,6 @@ const EmojiPickerPopup = ({width, height, emojiStyle, onEmojiChoose}) => {
             emojiStyle={emojiStyle}
             skinTonesDisabled={true}
             onEmojiClick={(emojiData) => {
-              setIcon(emojiData.emoji);
               onEmojiChoose(emojiData);
               setShowEmojiPicker(false);
             }}
