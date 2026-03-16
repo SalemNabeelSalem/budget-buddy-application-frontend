@@ -65,9 +65,13 @@ AxiosConfig.interceptors.response.use(
         );
       }
     } else if (error.request) {
-      alert("No response from server. Please check your network connection.");
+      toast.error(
+        `Network Error: ${error.message || "Unable to connect to the server. Please check your internet connection and try again."}`
+      )
     } else {
-      alert("An error occurred. Please try again.");
+      toast.error(
+        `Error: ${error.message || "An unexpected error occurred. Please try again."}`
+      );
     }
 
     return Promise.reject(error);

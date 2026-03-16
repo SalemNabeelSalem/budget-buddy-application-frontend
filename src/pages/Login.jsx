@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
-import Input from "../components/Input.jsx";
+import Input from "../components/global/Input.jsx";
 
 import {AppContext} from "../contexts/AppContext.jsx";
 

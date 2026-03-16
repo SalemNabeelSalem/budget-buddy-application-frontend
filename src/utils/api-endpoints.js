@@ -16,6 +16,11 @@ const endpoints = {
     LIST: "/category",
     CREATE: "/category/create",
     UPDATE: (categoryId) => `/category/${categoryId}`,
+  },
+  INCOME: {
+    LIST: "/incomes/all",
+    CREATE: "/income/create",
+    UPDATE: (incomeId) => `/income/${incomeId}`,
   }
 };
 

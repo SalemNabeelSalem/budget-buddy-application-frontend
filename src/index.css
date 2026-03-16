@@ -7,16 +7,8 @@ body {
   overflow-x: hidden;
 }
 
-.add-btn {
-  /*
-   * @apply means that we can write tailwind classes in css and it will be compiled to regular css.
-   * This is useful for writing custom styles that are not available in tailwind.
-  */
-  @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-green-700 whitespace-nowrap bg-green-50 border border-green-100 rounded-lg px-4 py-2 cursor-pointer;
-}
-
-.add-btn-fill {
-  @apply text-white bg-purple-600;
+.card {
+  @apply bg-white p-6 rounded-2xl shadow-lg shadow-gray-100 border border-gray-100;
 }
 
 /*

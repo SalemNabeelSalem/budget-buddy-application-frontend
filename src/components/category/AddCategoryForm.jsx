@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-import Input from "../Input.jsx";
+import Input from "../global/Input.jsx";
 
 import EmojiPickerPopup from "../global/EmojiPickerPopup.jsx";
 

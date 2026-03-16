@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import UseUser from "../hooks/UseUser.jsx";
 
@@ -18,15 +18,15 @@ const Category = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [categoryDate, setCategoryDate] = useState([]);
-
   const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
 
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
 
+  const [categoryDate, setCategoryDate] = useState([]);
+
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const fetchCategoryDetails = async () => {
+  const fetchCategoryDetails = useCallback(async () => {
     if (loading) return;
 
     setLoading(true);
@@ -44,7 +44,7 @@ const Category = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const handleAddCategory = async (category) => {
     if (loading) return;
@@ -129,10 +129,12 @@ const Category = () => {
   useEffect(() => {
     fetchCategoryDetails().then(() => {
       console.log("category details fetched successfully.");
+    }).catch((error) => {
+      console.error("error fetching category details:", error);
     });
 
     console.log("selected category changed:", selectedCategory);
-  }, [selectedCategory]);
+  }, [selectedCategory, fetchCategoryDetails]);
 
   return (
     <Dashboard activeMenu="Categories">
@@ -141,7 +143,7 @@ const Category = () => {
           <h2 className="text-2xl font-semibold">All Categories</h2>
 
           <button
-            className="add-btn flex items-center gap-1"
+            className="flex items-center mt-1 gap-2 px-3 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 active:bg-blue-700 transition"
             onClick={() => setOpenAddCategoryModal(true)}
           >
             <Plus size={15} />
