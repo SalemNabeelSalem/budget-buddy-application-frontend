@@ -43,6 +43,14 @@ const TransactionInfoCard = ({ title, icon, date, amount, categoryType, category
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            className="flex items-center text-blue-500 hover:text-blue-700 text-sm cursor-pointer"
+            onClick={() => {}}
+          >
+            <Pencil size={18} />
+             Edit
+          </button>
+
           {hideDeleteBtn && (
             <button
               className="flex items-center gap-1 text-red-500 hover:text-red-700 text-sm cursor-pointer"
@@ -52,14 +60,6 @@ const TransactionInfoCard = ({ title, icon, date, amount, categoryType, category
               Delete
             </button>
           )}
-
-          <button
-            className="flex items-center text-blue-500 hover:text-blue-700 text-sm cursor-pointer"
-            onClick={() => {}}
-          >
-            <Pencil size={18} />
-             Edit
-          </button>
         </div>
 
       </div>

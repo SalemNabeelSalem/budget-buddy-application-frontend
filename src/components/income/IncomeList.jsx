@@ -30,7 +30,7 @@ const IncomeList = ({ incomes, onEditIncome, onDeleteIncome }) => {
       </div>
 
       {incomes.length === 0 ? (
-        <p className="text-gray-500">No incomes found.</p>
+        <p className="text-lg text-gray-500">No incomes found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {incomes.map((income) => (
@@ -43,8 +43,8 @@ const IncomeList = ({ incomes, onEditIncome, onDeleteIncome }) => {
               categoryType="Income"
               category={income.categoryName}
               hideDeleteBtn
-              onDelete={() => onDeleteIncome(income.id)}
               onEdit={() => onEditIncome(income.id)}
+              onDelete={() => onDeleteIncome(income.id)}
             />
           ))}
         </div>

@@ -93,6 +93,46 @@ const Income = () => {
     }
   }
 
+  const handleDeleteIncome = (incomeId) => {
+    setOpenDeleteIncomeModal({
+      show: true,
+      data: incomeId,
+    });
+  }
+
+  const handleConfirmDeleteIncome = async (incomeId) => {
+    if (loading) return;
+
+    setLoading(true);
+
+    console.log("Deleting income with ID:", incomeId);
+
+    try {
+      const response = await AxiosConfig.delete(API_ENDPOINTS.INCOME.DELETE(incomeId));
+
+      if (response.status === 204) {
+        toast.success("Income deleted successfully.");
+
+        fetchIncomeDetails().then(() => {
+          console.log("Income details fetched successfully after deleting income.");
+        }).catch((error) => {
+          console.error("Error fetching income details after deleting income:", error);
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting income:", error);
+
+      toast.error("Failed to delete income. Please try again later.");
+    } finally {
+      setLoading(false);
+
+      setOpenDeleteIncomeModal({
+        show: false,
+        data: null,
+      });
+    }
+  }
+
   useEffect(() => {
     fetchIncomeDetails().then(() => {
       console.log("Income details fetched successfully.");
@@ -129,9 +169,7 @@ const Income = () => {
 
           <IncomeList
             incomes={incomeData}
-            onDeleteIncome={(incomeId) => {
-              console.log("Delete income: " + incomeId);
-            }}
+            onDeleteIncome={handleDeleteIncome}
             onEditIncome={(incomeId) => {
               console.log("Edit income: " + incomeId);
             }}
@@ -144,6 +182,35 @@ const Income = () => {
               onClose={() => setOpenAddIncomeModal(false)}
             >
               <AddIncomeForm incomeCategoriesData={incomeCategoriesData} onAddIncome={handleAddIncome} />
+            </Model>
+          )}
+
+          {openDeleteIncomeModal.show && (
+            <Model
+              title="Delete Income"
+              isOpen={openDeleteIncomeModal.show}
+              onClose={() => setOpenDeleteIncomeModal({ show: false, data: null })}
+            >
+              <p>Are you sure you want to delete this income?</p>
+
+              <div className="flex justify-end gap-3 mt-4">
+                <button
+                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
+                  onClick={() => setOpenDeleteIncomeModal({ show: false, data: null })}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                  onClick={() => {
+                    handleConfirmDeleteIncome(openDeleteIncomeModal.data).then(() => {});
+                    setOpenDeleteIncomeModal({ show: false, data: null });
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </Model>
           )}
         </div>

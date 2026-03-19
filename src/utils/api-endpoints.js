@@ -4,23 +4,24 @@ export const CLOUDINARY_CLOUD_NAME = VITE_CLOUDINARY_CLOUD_NAME;
 export const BACKEND_BASE_URL = VITE_BACKEND_BASE_URL;
 
 const endpoints = {
+  CLOUDINARY: {
+    UPLOAD: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+  },
   PROFILE: {
     REGISTER: "/profile/register",
     LOGIN: "/profile/login",
     ME: "/profile/me",
   },
-  CLOUDINARY: {
-    UPLOAD: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-  },
   CATEGORY: {
+    CREATE: "/category/create",
     LIST: "/category",
     LIST_BY_TYPE: (type) => `/category?type=${type}`,
-    CREATE: "/category/create",
     UPDATE: (categoryId) => `/category/${categoryId}`,
   },
   INCOME: {
-    LIST: "/incomes/all",
     CREATE: "/incomes/create",
+    LIST: "/incomes/all",
+    DELETE: (incomeId) => `/incomes/${incomeId}`,
     UPDATE: (incomeId) => `/incomes/${incomeId}`,
   }
 };
