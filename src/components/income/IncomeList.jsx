@@ -44,6 +44,7 @@ const IncomeList = ({ incomes, onEditIncome, onDeleteIncome }) => {
               category={income.categoryName}
               hideDeleteBtn
               onDelete={() => onDeleteIncome(income.id)}
+              onEdit={() => onEditIncome(income.id)}
             />
           ))}
         </div>

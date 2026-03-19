@@ -14,13 +14,14 @@ const endpoints = {
   },
   CATEGORY: {
     LIST: "/category",
+    LIST_BY_TYPE: (type) => `/category?type=${type}`,
     CREATE: "/category/create",
     UPDATE: (categoryId) => `/category/${categoryId}`,
   },
   INCOME: {
     LIST: "/incomes/all",
-    CREATE: "/income/create",
-    UPDATE: (incomeId) => `/income/${incomeId}`,
+    CREATE: "/incomes/create",
+    UPDATE: (incomeId) => `/incomes/${incomeId}`,
   }
 };
 

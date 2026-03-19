@@ -27,9 +27,11 @@ const Input = ({type, label, value, onchange, placeholder, isSelect, options}) =
               Select {label}
             </option>
 
-            {options.map((option) => (
+            {options
+              .sort((a, b) => a.label.localeCompare(b.label))
+              .map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {option.label.toUpperCase()}{!option.icon ? '' : `${option.icon}`}
               </option>
             ))}
           </select>

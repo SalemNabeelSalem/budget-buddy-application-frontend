@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 
 import UseUser from "../hooks/UseUser.jsx";
 
-import Model from "../components/Model.jsx";
+import Model from "../components/global/Model.jsx";
 import Dashboard from "../components/dashboard/Dashboard.jsx";
 import CategoryList from "../components/category/CategoryList.jsx";
 import AddCategoryForm from "../components/category/AddCategoryForm.jsx";

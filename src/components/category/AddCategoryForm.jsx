@@ -67,7 +67,7 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
   }, [isEditing, initialCategoryData])
 
   return (
-    <div className="p-4">
+    <div className="card p-4">
       <Input
         type="text"
         label="Category Name"
