@@ -7,6 +7,7 @@ import IncomeList from "../components/income/IncomeList.jsx";
 import Dashboard from "../components/dashboard/Dashboard.jsx";
 import DeleteAlert from "../components/global/DeleteAlert.jsx";
 import AddIncomeForm from "../components/income/AddIncomeForm.jsx";
+import IncomeOverview from "../components/income/IncomeOverview.jsx";
 
 import AxiosConfig from "../utils/AxiosConfig.jsx";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
@@ -33,10 +34,6 @@ const Income = () => {
   const [incomeCategoriesData, setIncomeCategoriesData] = useState([]);
 
   const fetchIncomeDetails = useCallback(async () => {
-    if (loading) return;
-
-    setLoading(true);
-
     try {
       const response = await AxiosConfig.get(API_ENDPOINTS.INCOME.LIST);
 
@@ -47,8 +44,6 @@ const Income = () => {
       console.error("error fetching income details:", error);
 
       toast.error("Failed to fetch income details. Please try again later.");
-    } finally {
-      setLoading(false);
     }
   }, []);
 
@@ -165,7 +160,7 @@ const Income = () => {
 
         <div className="grid grid-cols-1 gap-6">
           <div>
-            {/* overview for income with line char */}
+            <IncomeOverview transactions={incomeData} />
           </div>
 
           <IncomeList
