@@ -5,6 +5,7 @@ import UseUser from "../hooks/UseUser.jsx";
 import Model from "../components/global/Model.jsx";
 import IncomeList from "../components/income/IncomeList.jsx";
 import Dashboard from "../components/dashboard/Dashboard.jsx";
+import DeleteAlert from "../components/global/DeleteAlert.jsx";
 import AddIncomeForm from "../components/income/AddIncomeForm.jsx";
 
 import AxiosConfig from "../utils/AxiosConfig.jsx";
@@ -191,26 +192,11 @@ const Income = () => {
               isOpen={openDeleteIncomeModal.show}
               onClose={() => setOpenDeleteIncomeModal({ show: false, data: null })}
             >
-              <p>Are you sure you want to delete this income?</p>
-
-              <div className="flex justify-end gap-3 mt-4">
-                <button
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
-                  onClick={() => setOpenDeleteIncomeModal({ show: false, data: null })}
-                >
-                  Cancel
-                </button>
-
-                <button
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-                  onClick={() => {
-                    handleConfirmDeleteIncome(openDeleteIncomeModal.data).then(() => {});
-                    setOpenDeleteIncomeModal({ show: false, data: null });
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
+              <DeleteAlert
+                message="Are you sure you want to delete this income?"
+                cancelHandler={() => setOpenDeleteIncomeModal({ show: false, data: null })}
+                deleteHandler={() => handleConfirmDeleteIncome(openDeleteIncomeModal.data)}
+              />
             </Model>
           )}
         </div>

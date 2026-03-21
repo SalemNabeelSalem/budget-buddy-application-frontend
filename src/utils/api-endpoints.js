@@ -13,16 +13,16 @@ const endpoints = {
     ME: "/profile/me",
   },
   CATEGORY: {
-    CREATE: "/category/create",
+    CREATE: "/category",
     LIST: "/category",
     LIST_BY_TYPE: (type) => `/category?type=${type}`,
     UPDATE: (categoryId) => `/category/${categoryId}`,
   },
   INCOME: {
-    CREATE: "/incomes/create",
-    LIST: "/incomes/all",
+    CREATE: "/incomes",
+    LIST: "/incomes",
     DELETE: (incomeId) => `/incomes/${incomeId}`,
-    UPDATE: (incomeId) => `/incomes/${incomeId}`,
+    // UPDATE: (incomeId) => `/incomes/${incomeId}`,
   }
 };
 
