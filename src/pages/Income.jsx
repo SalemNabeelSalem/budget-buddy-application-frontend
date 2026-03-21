@@ -33,6 +33,8 @@ const Income = () => {
 
   const [incomeCategoriesData, setIncomeCategoriesData] = useState([]);
 
+  const [selectedIncome, setSelectedIncome] = useState(null);
+
   const fetchIncomeDetails = useCallback(async () => {
     try {
       const response = await AxiosConfig.get(API_ENDPOINTS.INCOME.LIST);
@@ -84,6 +86,51 @@ const Income = () => {
       console.error("Error adding income:", error);
 
       toast.error("Failed to add income. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleEditIncome = (income) => {
+    setSelectedIncome(income);
+    setOpenEditIncomeModal(true);
+  }
+
+  const handleUpdateIncome = async (updatedIncome) => {
+    if (loading) return;
+
+    setLoading(true);
+
+    const existingIncome = incomeData.find(
+      (inc) => inc.name.toLowerCase() === updatedIncome.name.toLowerCase() && inc.id !== updatedIncome.id
+    );
+
+    if (existingIncome) {
+      toast.error("An income with the same name already exists. Please choose a different name.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await AxiosConfig.put(API_ENDPOINTS.INCOME.UPDATE(updatedIncome.id), updatedIncome);
+
+      if (response.status === 200) {
+        toast.success("Income updated successfully.");
+
+        setOpenEditIncomeModal(false);
+
+        setSelectedIncome(null);
+
+        fetchIncomeDetails().then(() => {
+          console.log("Income details fetched successfully after updating income.");
+        }).catch((error) => {
+          console.error("Error fetching income details after updating income:", error);
+        });
+      }
+    } catch (error) {
+      console.error("Error updating income:", error);
+
+      toast.error("Failed to update income. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -165,10 +212,8 @@ const Income = () => {
 
           <IncomeList
             incomes={incomeData}
+            onEditIncome={handleEditIncome}
             onDeleteIncome={handleDeleteIncome}
-            onEditIncome={(incomeId) => {
-              console.log("Edit income: " + incomeId);
-            }}
           />
 
           {openAddIncomeModal && (
@@ -194,6 +239,25 @@ const Income = () => {
               />
             </Model>
           )}
+
+          {openEditIncomeModal && (
+            <Model
+              title="Edit Income"
+              isOpen={openEditIncomeModal}
+              onClose={() => {
+                setOpenEditIncomeModal(false);
+                setSelectedIncome(null);
+              }}
+            >
+              <AddIncomeForm
+                onAddIncome={handleUpdateIncome}
+                incomeCategoriesData={incomeCategoriesData}
+                initialIncomeData={{...selectedIncome}}
+                isEditing={true}
+              />
+            </Model>
+          )}
+
         </div>
       </div>
     </Dashboard>

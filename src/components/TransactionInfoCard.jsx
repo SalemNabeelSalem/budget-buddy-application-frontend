@@ -1,6 +1,6 @@
 import {Pencil, Trash2, TrendingDown, TrendingUp, UtensilsCrossed} from "lucide-react";
 
-const TransactionInfoCard = ({ title, icon, date, amount, categoryType, category, hideDeleteBtn, onDelete }) => {
+const TransactionInfoCard = ({ title, icon, date, amount, categoryType, category, hideDeleteBtn, onEdit, onDelete }) => {
   const getCategoryTypeStyle = () => categoryType === "Expense" ? "bg-red-50 text-red-800" : "bg-green-50 text-green-800";
 
   return (
@@ -45,7 +45,7 @@ const TransactionInfoCard = ({ title, icon, date, amount, categoryType, category
         <div className="flex items-center gap-3">
           <button
             className="flex items-center text-blue-500 hover:text-blue-700 text-sm cursor-pointer"
-            onClick={() => {}}
+            onClick={onEdit}
           >
             <Pencil size={18} />
              Edit

@@ -27,10 +27,6 @@ const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const fetchCategoryDetails = useCallback(async () => {
-    if (loading) return;
-
-    setLoading(true);
-
     try {
       const response = await AxiosConfig.get(API_ENDPOINTS.CATEGORY.LIST);
 
@@ -117,6 +113,8 @@ const Category = () => {
       }
     } catch (error) {
       console.error("error updating category:", error.response.data.message);
+
+      toast.error("Failed to update category. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -151,7 +149,11 @@ const Category = () => {
           </button>
         </div>
 
-        <CategoryList categories={categoryDate} onEditCategory={handleEditCategory} onDeleteCategory={handleDeleteCategory} />
+        <CategoryList
+          categories={categoryDate}
+          onEditCategory={handleEditCategory}
+          onDeleteCategory={handleDeleteCategory}
+        />
 
         {openAddCategoryModal && (
           <Model

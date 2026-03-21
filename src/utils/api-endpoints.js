@@ -21,8 +21,8 @@ const endpoints = {
   INCOME: {
     CREATE: "/incomes",
     LIST: "/incomes",
+    UPDATE: (incomeId) => `/incomes/${incomeId}`,
     DELETE: (incomeId) => `/incomes/${incomeId}`,
-    // UPDATE: (incomeId) => `/incomes/${incomeId}`,
   }
 };
 
