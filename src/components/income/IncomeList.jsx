@@ -1,10 +1,39 @@
+import {useState} from "react";
+
 import TransactionInfoCard from "../TransactionInfoCard.jsx";
 
 import moment from "moment";
+import {Download, LoaderCircle, Mail} from "lucide-react";
 
-import {Download, Mail} from "lucide-react";
+const IncomeList = ({ incomes, onEditIncome, onDeleteIncome, onDownloadIncome, onEmailIncome }) => {
+  const [downloadLoading, setDownloadLoading] = useState(false);
 
-const IncomeList = ({ incomes, onEditIncome, onDeleteIncome }) => {
+  const [emailLoading, setEmailLoading] = useState(false);
+
+  const handleDownloadIncomeReport = async () => {
+    if (downloadLoading) return;
+
+    setDownloadLoading(true);
+
+    try {
+      await onDownloadIncome();
+    } finally {
+      setDownloadLoading(false);
+    }
+  }
+
+  const handleEmailIncomeReport = async () => {
+    if (emailLoading) return;
+
+    setEmailLoading(true);
+
+    try {
+      await onEmailIncome();
+    } finally {
+      setEmailLoading(false);
+    }
+  }
+
   return (
     <div className="card p-4">
       <div className="flex items-center justify-between mb-4">
@@ -13,19 +42,39 @@ const IncomeList = ({ incomes, onEditIncome, onDeleteIncome }) => {
 
       <div className="flex items-center gap-4 mb-4">
         <button
-          className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 active:bg-green-700 transition"
-          onClick={() => {}}
+          className={`flex items-center gap-2 px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 active:bg-green-700 transition ${downloadLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+          onClick={handleDownloadIncomeReport}
+          disabled={downloadLoading}
         >
-          <Download size={15} className="shrink-0" />
-          <span>Download Report</span>
+          {downloadLoading ? (
+            <>
+              <LoaderCircle size={15} className="shrink-0 animate-spin" />
+              <span>Downloading...</span>
+            </>
+          ) : (
+            <>
+              <Download size={15} className="shrink-0" />
+              <span>Download Report</span>
+            </>
+          )}
         </button>
 
         <button
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 active:bg-blue-700 transition"
-          onClick={() => {}}
+          className={`flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 active:bg-blue-700 transition ${emailLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+          onClick={handleEmailIncomeReport}
+          disabled={emailLoading}
         >
-          <Mail size={15} className="shrink-0" />
-          <span>Email Report</span>
+          {emailLoading ? (
+            <>
+              <LoaderCircle size={15} className="shrink-0 animate-spin" />
+              <span>Emailing...</span>
+            </>
+          ) : (
+            <>
+              <Mail size={15} className="shrink-0" />
+              <span>Email Report</span>
+            </>
+          )}
         </button>
       </div>
 

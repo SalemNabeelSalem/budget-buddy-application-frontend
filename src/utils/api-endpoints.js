@@ -23,6 +23,14 @@ const endpoints = {
     LIST: "/incomes",
     UPDATE: (incomeId) => `/incomes/${incomeId}`,
     DELETE: (incomeId) => `/incomes/${incomeId}`,
+  },
+  EXCEL: {
+    INCOME: "/excel/incomes",
+    EXPENSE: "/excel/incomes",
+  },
+  EMAIL: {
+    INCOME: "/email/incomes-excel",
+    EXPENSE: "/email/expenses-excel",
   }
 };
 

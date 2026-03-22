@@ -15,15 +15,15 @@ export const SIDEBAR_DATA = [
   },
   {
     id: 3,
-    title: "Expenses",
-    icon: Coins,
-    link: "/expense"
-  },
-  {
-    id: 4,
     title: "Incomes",
     icon: Wallet,
     link: "/income"
+  },
+  {
+    id: 4,
+    title: "Expenses",
+    icon: Coins,
+    link: "/expense"
   },
   {
     id: 5,

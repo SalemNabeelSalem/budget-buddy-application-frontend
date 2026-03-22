@@ -176,6 +176,52 @@ const Income = () => {
     }
   }
 
+  const handleDownloadIncomeReport = async () => {
+    try {
+      const response = await AxiosConfig.get(API_ENDPOINTS.EXCEL.INCOME, {
+        responseType: "blob",
+      });
+
+      let fileName = "incomes-report.xlsx";
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+
+      const link = document.createElement("a");
+
+      link.href = url;
+
+      link.setAttribute("download", fileName);
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      document.body.removeChild(link);
+
+      window.URL.revokeObjectURL(url);
+
+      toast.success("Incomes report downloaded successfully.");
+    } catch (error) {
+      console.error("Error downloading income report:", error);
+      toast.error("Failed to download income report. Please try again later.");
+    }
+  };
+
+  const handleEmailIncomeReport = async () => {
+    try {
+      const response = await AxiosConfig.get(API_ENDPOINTS.EMAIL.INCOME);
+
+      if (response.status === 200) {
+        toast.success("Incomes report emailed successfully.");
+      } else {
+        toast.error("Failed to email income report. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error deleting income report:", error);
+      toast.error("Failed to email income report. Please try again later.");
+    }
+  };
+
   useEffect(() => {
     fetchIncomeDetails().then(() => {
       console.log("Income details fetched successfully.");
@@ -214,6 +260,8 @@ const Income = () => {
             incomes={incomeData}
             onEditIncome={handleEditIncome}
             onDeleteIncome={handleDeleteIncome}
+            onDownloadIncome={handleDownloadIncomeReport}
+            onEmailIncome={handleEmailIncomeReport}
           />
 
           {openAddIncomeModal && (
@@ -257,7 +305,6 @@ const Income = () => {
               />
             </Model>
           )}
-
         </div>
       </div>
     </Dashboard>

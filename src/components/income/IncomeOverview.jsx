@@ -24,6 +24,13 @@ const IncomeOverview = ({ transactions }) => {
         <div className="card p-4">
           <h4 className="text-lg font-semibold mb-2">Total Incomes</h4>
           <p className="text-2xl font-bold text-green-500">
+            {transactions.length}
+          </p>
+        </div>
+
+        <div className="card p-4">
+          <h4 className="text-lg font-semibold mb-2">Total Incomes Amount</h4>
+          <p className="text-2xl font-bold text-green-500">
             AED {calculateTotalIncome()}
           </p>
         </div>

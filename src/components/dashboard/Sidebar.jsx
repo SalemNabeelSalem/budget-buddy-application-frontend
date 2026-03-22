@@ -1,8 +1,8 @@
 import {useContext} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {AppContext} from "../../contexts/AppContext.jsx";
 import {SIDEBAR_DATA} from "../../assets/sidebar.js";
+import {AppContext} from "../../contexts/AppContext.jsx";
 
 import {User} from "lucide-react";
 
