@@ -24,13 +24,19 @@ const endpoints = {
     UPDATE: (incomeId) => `/incomes/${incomeId}`,
     DELETE: (incomeId) => `/incomes/${incomeId}`,
   },
+  EXPENSE: {
+    CREATE: "/expenses",
+    LIST: "/expenses",
+    UPDATE: (expenseId) => `/expenses/${expenseId}`,
+    DELETE: (expenseId) => `/expenses/${expenseId}`,
+  },
   EXCEL: {
-    INCOME: "/excel/incomes",
-    EXPENSE: "/excel/incomes",
+    INCOME: "/download/excel-incomes",
+    EXPENSE: "/download/excel-expenses",
   },
   EMAIL: {
-    INCOME: "/email/incomes-excel",
-    EXPENSE: "/email/expenses-excel",
+    INCOME: "/email/excel-incomes",
+    EXPENSE: "/email/excel-expenses",
   }
 };
 

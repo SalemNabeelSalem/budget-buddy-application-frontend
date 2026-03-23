@@ -21,7 +21,9 @@ const Sidebar = ({activeMenu}) => {
             className="w-20 h-20 bg-slate-400 rounded-full"
           />
         ) : (
-          <User className="w-20 h-20" />
+          <>
+            <User className="w-20 h-20" />
+          </>
         )}
 
         <h5 className="text-gray-950 font-medium leading-6">

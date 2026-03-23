@@ -85,7 +85,15 @@ const MenuBar = ({activeMenu}) => {
           onClick={() => setShowDropdown(!showDropdown)}
           className="flex items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-800 focus:ring-offset-2"
         >
-          <User className="text-purple-500"/>
+          {user?.profileImageUrl ? (
+            <img
+              src={user?.profileImageUrl ?? "https://placehold.co/80x80?text=Profile+Image"}
+              alt="Profile"
+              className="w-10 h-10 bg-slate-400 rounded-full"
+            />
+          ) : (
+            <User className="w-7 h-7 text-purple-600" />
+          )}
         </button>
 
         {showDropdown && (
@@ -93,7 +101,15 @@ const MenuBar = ({activeMenu}) => {
             <div className="px-4 py-3 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full">
-                  <User className="w-4 h-4 text-purple-600" />
+                  {user?.profileImageUrl ? (
+                    <img
+                      src={user?.profileImageUrl ?? "https://placehold.co/80x80?text=Profile+Image"}
+                      alt="Profile"
+                      className="w-8 h-8 bg-slate-400 rounded-full"
+                    />
+                  ) : (
+                    <User className="w-6 h-6 text-purple-600" />
+                  )}
                 </div>
 
                 <div className="flex-1 min-w-0">
@@ -110,12 +126,11 @@ const MenuBar = ({activeMenu}) => {
 
             <div className="py-1">
               <button
-                className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
-                onClick={() => handleLogout()}
+                onClick={handleLogout}
+                className="group flex w-full items-center gap-3 px-4 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
               >
-                <LogOut className="w-4 h-4 text-gray-500" />
-
-                <span>Logout</span>
+                <LogOut className="w-4 h-4 text-gray-500 group-hover:text-gray-700 transition-colors" />
+                <span className="group-hover:text-gray-900 transition-colors">Logout</span>
               </button>
             </div>
           </div>
