@@ -30,6 +30,9 @@ const endpoints = {
     UPDATE: (expenseId) => `/expenses/${expenseId}`,
     DELETE: (expenseId) => `/expenses/${expenseId}`,
   },
+  FILTERS: {
+    LIST: "/filters",
+  },
   EXCEL: {
     INCOME: "/download/excel-incomes",
     EXPENSE: "/download/excel-expenses",

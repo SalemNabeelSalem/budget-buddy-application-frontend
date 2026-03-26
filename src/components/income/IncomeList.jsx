@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import TransactionInfoCard from "../TransactionInfoCard.jsx";
+import TransactionInfoCard from "../global/TransactionInfoCard.jsx";
 
 import moment from "moment";
 import {Download, LoaderCircle, Mail} from "lucide-react";

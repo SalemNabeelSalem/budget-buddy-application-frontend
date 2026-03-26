@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 
 import Input from "../components/global/Input.jsx";
-import ProfilePhotoUpload from "../components/ProfilePhotoUpload.jsx";
+import ProfilePhotoUpload from "../components/global/ProfilePhotoUpload.jsx";
 
 import images from "../assets/images.js";
 

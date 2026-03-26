@@ -1,4 +1,4 @@
-# Budget Buddy Application Frontend
+# Budget Buddy — Frontend Application
 
 ![Budget Buddy Logo](src/assets/logo.png)
 
@@ -83,21 +83,24 @@ Follow these steps to get the Budget Buddy frontend application up and running o
     # yarn install
     ```
 
-3.  **Environment Configuration**
+   3.  **Environment Configuration**
 
-    This project uses environment variables, typically for API endpoints or other sensitive settings.
+       This project uses environment variables, typically for API endpoints or other sensitive settings.
 
-    *   Create a `.env` file in the root directory of the project by copying the example:
+       *   Create a `.env` file in the root directory of the project by copying the example:
 
-        ```bash
-        cp .env.example .env
-        ```
-    *   Open the newly created `.env` file and configure your variables. A crucial variable will likely be the backend API base URL:
+           ```bash
+           cp .env.example .env
+           ```
+       *   Open the newly created `.env` file and configure your variables. A crucial variable will likely be the backend API base URL:
 
-        ```dotenv
-        VITE_APP_API_BASE_URL="http://localhost:5000/api" # Replace with your backend API URL
-        ```
-        **Note**: Ensure your backend server is running and accessible at the specified URL.
+           ```dotenv
+           VITE_APP_API_BASE_URL="http://localhost:5000/api" # Replace with your backend API URL
+           VITE_CLOUDINARY_CLOUD_NAME={your_cloudinary_cloud_name} # If using Cloudinary for image uploads
+           VITE_CLOUDINARY_UPLOAD_PRESET={your_cloudinary_upload_preset} # If using Cloudinary for image uploads
+           ```
+           ```
+           **Note**: Ensure your backend server is running and accessible at the specified URL.
 
 4.  **Run the Development Server**
 
@@ -166,7 +169,6 @@ The project follows a standard React application structure, organized for clarit
 ├── .env.example              # Example environment variables
 ├── .gitignore                # Files and directories to ignore in Git
 ├── README.md                 # Project README file
-├── eslint.config.js          # ESLint configuration for code quality
 ├── index.html                # Main HTML entry point
 ├── package-lock.json         # Records exact dependency versions
 ├── package.json              # Project metadata and scripts
