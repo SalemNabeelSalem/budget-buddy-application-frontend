@@ -33,6 +33,9 @@ const endpoints = {
   FILTERS: {
     LIST: "/filters",
   },
+  DASHBOARD: {
+    LIST: "/dashboard",
+  },
   EXCEL: {
     INCOME: "/download/excel-incomes",
     EXPENSE: "/download/excel-expenses",
