@@ -11,5 +11,5 @@ export default defineConfig({
     tailwindcss(),
   ],
 
-  base: process.env.VITE_BASE_PATH || "budget-buddy-application-frontend",
+  base: process.env.VITE_BASE_PATH || "/budget-buddy-application-frontend",
 })
