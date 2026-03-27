@@ -11,6 +11,7 @@ This repository houses the frontend application for **Budget Buddy**, a comprehe
 -   [Prerequisites & Dependencies](#prerequisites--dependencies)
 -   [Installation & Setup Instructions](#installation--setup-instructions)
 -   [Usage Examples & Backend Interaction](#usage-examples--backend-interaction)
+-   [📸 Screenshots](#-screenshots)
 -   [Configuration Options](#configuration-options)
 -   [Project Structure](#project-structure)
 -   [Contributing Guidelines](#contributing-guidelines)
@@ -147,6 +148,93 @@ Once the application is running, users can interact with Budget Buddy through th
     This frontend application is designed to interact with a separate backend API to fetch, create, update, and delete financial data. All data persistence and business logic are handled by the backend.
     *   **API Calls**: `axios` is used throughout the application to make HTTP requests to the `VITE_APP_API_BASE_URL` defined in your `.env` file.
     *   **Data Flow**: User actions on the frontend trigger API calls to the backend. The backend processes these requests, interacts with the database, and sends back responses which the frontend then renders to the user.
+
+## 📸 Screenshots
+
+The following UI previews highlight the full user flow, from authentication to transaction management and filtering.
+
+### Authentication
+
+<p align="center">
+  <img src="./images/01-signup-page.png" alt="Sign Up page showing user registration form for creating a new account" width="48%" />
+  <img src="./images/02-login-page.png" alt="Login page showing authentication form for returning users" width="48%" />
+</p>
+<p align="center">
+  <sub><strong>Left:</strong> Sign Up page - create a new Budget Buddy account.</sub><br/>
+  <sub><strong>Right:</strong> Login page - sign in with existing credentials.</sub>
+</p>
+
+### Dashboard
+
+<p align="center">
+  <img src="./images/03-dashboard-page.png" alt="Dashboard page showing financial overview cards and recent transaction insights" width="80%" />
+</p>
+<p align="center">
+  <sub>Main dashboard with key summaries and financial insights.</sub>
+</p>
+
+### Category Management
+
+<p align="center">
+  <img src="./images/04-add-new-category-form.png" alt="Add category modal with name, type, and emoji icon selection" width="48%" />
+  <img src="./images/05-categories-page.png" alt="Categories page listing existing category items for management" width="48%" />
+</p>
+<p align="center">
+  <sub><strong>Left:</strong> Add new category form with emoji picker support.</sub><br/>
+  <sub><strong>Right:</strong> Categories page for browsing and managing category records.</sub>
+</p>
+
+<p align="center">
+  <img src="./images/06-update-existing-category-form.png" alt="Edit category modal for updating category details and icon" width="60%" />
+</p>
+<p align="center">
+  <sub>Update existing category form for quick category edits.</sub>
+</p>
+
+### Income Management
+
+<p align="center">
+  <img src="./images/07-add-new-income-form.png" alt="Add income form with source name, category, amount, date, and icon" width="48%" />
+  <img src="./images/08-incomes-page.png" alt="Incomes page showing income entries, totals, and actions" width="48%" />
+</p>
+<p align="center">
+  <sub><strong>Left:</strong> Add new income transaction.</sub><br/>
+  <sub><strong>Right:</strong> Incomes list page with transaction overview.</sub>
+</p>
+
+<p align="center">
+  <img src="./images/09-update-existing-income-form.png" alt="Edit income form for updating income details" width="60%" />
+</p>
+<p align="center">
+  <sub>Update existing income form with editable transaction fields.</sub>
+</p>
+
+### Expense Management
+
+<p align="center">
+  <img src="./images/10-add-new-expense-form.png" alt="Add expense form with source, category, amount, date, and icon" width="48%" />
+  <img src="./images/11-expenses-page.png" alt="Expenses page listing tracked expenses with management actions" width="48%" />
+</p>
+<p align="center">
+  <sub><strong>Left:</strong> Add new expense transaction.</sub><br/>
+  <sub><strong>Right:</strong> Expenses list page with reporting actions.</sub>
+</p>
+
+<p align="center">
+  <img src="./images/12-update-existing-expense-form.png" alt="Edit expense form for updating expense details" width="60%" />
+</p>
+<p align="center">
+  <sub>Update existing expense form for transaction maintenance.</sub>
+</p>
+
+### Filters
+
+<p align="center">
+  <img src="./images/13-filters-page.png" alt="Filters page for narrowing transactions by date, category, and type" width="80%" />
+</p>
+<p align="center">
+  <sub>Filtering interface to quickly find relevant financial records.</sub>
+</p>
 
 ## Configuration Options
 
