@@ -13,10 +13,10 @@ const endpoints = {
     ME: "/profile/me",
   },
   CATEGORY: {
-    CREATE: "/category",
-    LIST: "/category",
-    LIST_BY_TYPE: (type) => `/category?type=${type}`,
-    UPDATE: (categoryId) => `/category/${categoryId}`,
+    CREATE: "/categories",
+    LIST: "/categories",
+    LIST_BY_TYPE: (type) => `/categories?type=${type}`,
+    UPDATE: (categoryId) => `/categories/${categoryId}`,
   },
   INCOME: {
     CREATE: "/incomes",
