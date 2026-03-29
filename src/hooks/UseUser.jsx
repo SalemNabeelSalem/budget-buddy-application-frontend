@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import axiosConfig from "../utils/AxiosConfig.jsx";
 import {AppContext} from "../contexts/AppContext.jsx";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
+import {normalizeUserProfileImage} from "../utils/normalize-image-url.js";
 
 const UseUser = () => {
   const {user, setUser, clearUser} = useContext(AppContext);
@@ -22,7 +23,7 @@ const UseUser = () => {
         const response = await axiosConfig.get(API_ENDPOINTS.PROFILE.ME);
 
         if (isMounted && response.status === 200) {
-          setUser(response.data);
+          setUser(normalizeUserProfileImage(response.data));
         }
       } catch (error) {
         console.error("error fetching user data:", error);

@@ -6,10 +6,11 @@ import ProfilePhotoUpload from "../components/global/ProfilePhotoUpload.jsx";
 
 import images from "../assets/images.js";
 
+import AxiosConfig from "../utils/AxiosConfig.jsx";
 import {validateEmail} from "../utils/validations.js";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
 import uploadProfileImage from "../utils/upload-profile-image.js";
-import AxiosConfig from "../utils/AxiosConfig.jsx";
+import {normalizeImageUrl} from "../utils/normalize-image-url.js";
 
 import toast from "react-hot-toast";
 import {LoaderCircle} from "lucide-react";
@@ -68,7 +69,7 @@ const Signup = () => {
         const uploadResult = await uploadProfileImage(profilePhoto);
 
         if (uploadResult.ok) {
-          profileImageUrl = uploadResult.url || null;
+          profileImageUrl = normalizeImageUrl(uploadResult.url);
         }
       }
 

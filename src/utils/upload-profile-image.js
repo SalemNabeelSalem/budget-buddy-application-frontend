@@ -1,4 +1,5 @@
 import {API_ENDPOINTS} from "./api-endpoints";
+import {normalizeImageUrl} from "./normalize-image-url";
 
 const { VITE_CLOUDINARY_UPLOAD_PRESET } = import.meta.env;
 
@@ -38,12 +39,7 @@ const uploadProfileImage = async (image) => {
     */
     const data = json ?? (await response.json().catch(() => null));
 
-    data.secure_url = undefined;
-
-    /*
-     * if secure_url is missing, it means the upload succeeded but the response format is unexpected.
-    */
-    return { ok: true, url: data?.secure_url ?? data?.url ?? null, body: data };
+    return { ok: true, url: normalizeImageUrl(data?.secure_url ?? data?.url), body: data };
   } catch (error) {
     console.error("error uploading image:", error);
     throw error;

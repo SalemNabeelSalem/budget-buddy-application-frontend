@@ -10,6 +10,7 @@ import images from "../assets/images.js";
 import AxiosConfig from "../utils/AxiosConfig.jsx";
 import {validateEmail} from "../utils/validations.js";
 import {API_ENDPOINTS} from "../utils/api-endpoints.js";
+import {normalizeUserProfileImage} from "../utils/normalize-image-url.js";
 
 import toast from "react-hot-toast";
 import {LoaderCircle} from "lucide-react";
@@ -57,7 +58,7 @@ const Login = () => {
 
         if (token) {
           localStorage.setItem('token', token);
-          setUser(user);
+          setUser(normalizeUserProfileImage(user));
           navigate('/dashboard');
         }
 
