@@ -42,9 +42,13 @@ const IncomeList = ({ incomes, onEditIncome, onDeleteIncome, onDownloadIncome, o
 
       <div className="flex items-center gap-4 mb-4">
         <button
-          className={`flex items-center gap-2 px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 active:bg-green-700 transition ${downloadLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`flex items-center gap-2 px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-md hover:bg-green-600 active:bg-green-700 transition ${
+            downloadLoading || incomes.length === 0 
+              ? "opacity-50 cursor-not-allowed" 
+              : ""
+          }`}
           onClick={handleDownloadIncomeReport}
-          disabled={downloadLoading}
+          disabled={downloadLoading || incomes.length === 0}
         >
           {downloadLoading ? (
             <>
@@ -60,9 +64,13 @@ const IncomeList = ({ incomes, onEditIncome, onDeleteIncome, onDownloadIncome, o
         </button>
 
         <button
-          className={`flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 active:bg-blue-700 transition ${emailLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 active:bg-blue-700 transition ${
+            emailLoading || incomes.length === 0
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
           onClick={handleEmailIncomeReport}
-          disabled={emailLoading}
+          disabled={emailLoading || incomes.length === 0}
         >
           {emailLoading ? (
             <>

@@ -6,6 +6,7 @@ import Income from "./pages/Income.jsx";
 import Filter from "./pages/Filter.jsx";
 import Signup from "./pages/Signup.jsx";
 import Expense from "./pages/Expense.jsx";
+import Landing from "./pages/Landing.jsx";
 import Category from "./pages/Category.jsx";
 
 import {Toaster} from "react-hot-toast"; // used for showing toast notifications.
@@ -18,6 +19,8 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Root />} />
+
+          <Route path="/home" element={<Landing />} />
 
           <Route path="/dashboard" element={<Home />} />
 
@@ -45,7 +48,7 @@ const Root = () => {
   return isAuthenticated ? (
     <Navigate to="/dashboard"></Navigate>
   ) : (
-    <Navigate to="/login"></Navigate>
+    <Navigate to="/home"></Navigate>
   );
 }
 

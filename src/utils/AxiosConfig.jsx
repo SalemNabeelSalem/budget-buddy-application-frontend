@@ -44,17 +44,24 @@ AxiosConfig.interceptors.response.use(
   (error) => {
     if (error.response) {
       if (error.response.status === 400) {
-        // alert("400 Bad Request: The request was invalid. Please check your input and try again.");
+        /*
         toast.error(
           `400 Bad Request: ${error.response.data.message || "The request was invalid. Please check your input and try again."}`
         );
+        */
+
+        console.log(`400 Bad Request: ${error.response.data.message || "The request was invalid. Please check your input and try again."}`);
       } else if (error.response.status === 401) {
         localStorage.removeItem("token");
         window.location.href = "/login";
       } else if (error.response.status === 403) {
+        /*
         toast.error(
           `403 Forbidden: ${error.response.data.message || "You do not have permission to access this resource."}`
         );
+        */
+
+        console.log(`403 Forbidden: ${error.response.data.message || "You do not have permission to access this resource."}`);
       } else if (error.response.status === 409) {
         toast.error(
           `409 Conflict: ${error.response.data.message || "The request could not be completed due to a conflict with the current state of the resource."}`

@@ -138,6 +138,14 @@ const Login = () => {
                 Signup
               </Link>
             </p>
+
+            {/*  going to home */}
+            <p className="text-sm text-slate-800 text-center mt-6">
+              Have second thoughts?
+              <Link to="/home" className="text-indigo-600 hover:text-indigo-700 font-medium ml-1">
+                Back to Home
+              </Link>
+            </p>
           </form>
         </div>
       </div>

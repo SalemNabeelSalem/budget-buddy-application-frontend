@@ -49,8 +49,9 @@ const CategoryList = ({categories, onEditCategory, onDeleteCategory}) => {
                   </button>
 
                   <button
-                    className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
+                    className="text-red-500 hover:text-red-700 text-sm cursor-pointer hidden"
                     onClick={() => onDeleteCategory(category)}
+                    disabled={true}
                   >
                     <Trash size={18} />
                   </button>

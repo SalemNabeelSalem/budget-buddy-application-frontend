@@ -34,16 +34,19 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
 
     if (!category.name) {
       toast.error("category name is required.");
+      setLoading(false);
       return;
     }
 
     if (!category.type) {
       toast.error("category type is required.");
+      setLoading(false);
       return;
     }
 
     if (!category.icon) {
       toast.error("category icon is required.");
+      setLoading(false);
       return;
     }
 
