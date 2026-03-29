@@ -25,7 +25,7 @@ const Header = () => {
               className="h-9 w-9 object-contain"
             />
             <span className="text-lg lg:text-xl font-semibold text-gray-900">
-              Money Manager
+              Budget Buddy
             </span>
           </Link>
 
