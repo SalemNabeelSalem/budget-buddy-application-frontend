@@ -10,11 +10,23 @@ import Landing from "./pages/Landing.jsx";
 import Category from "./pages/Category.jsx";
 
 import {Toaster} from "react-hot-toast"; // used for showing toast notifications.
+import { Analytics } from "@vercel/analytics/react" // used for tracking user interactions and performance metrics.
+import { SpeedInsights } from "@vercel/speed-insights/react"; // used for measuring the performance of the application.
 
 const App = () => {
   return (
     <>
       <Toaster />
+
+      {/* Vercel Analytics - tracks user interactions and pageviews */}
+      <Analytics />
+
+      {/* Optional: You can render SpeedInsights anywhere */}
+      <div style={{ position: "fixed", bottom: 20, right: 20, width: 300 }}>
+        <SpeedInsights
+          url="https://budget-buddy-application-frontend.vercel.app"
+        />
+      </div>
 
       <BrowserRouter>
         <Routes>
